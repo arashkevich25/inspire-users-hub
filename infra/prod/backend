@@ -1,0 +1,4 @@
+region   = "eu-north-1"
+bucket   = "services-prod"
+key      = "services-aws/users-hub.tfstate"
+role_arn = ""

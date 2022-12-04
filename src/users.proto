@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package users;
+
+service UserAuth {
+  rpc ValidateUser (ValidateUserArgs) returns (ValidatedUser) {}
+}
+
+service GlobalStream {
+  rpc BasicChanel (stream BasicChanelRequest) returns (stream BasicChanelResponse) {}
+}
+
+service Global {
+  rpc SetSociety (SocietyType) returns (Empty) {}
+  rpc AddUserDevice (AddDeviceIdBody) returns (AddDeviceIdBody) {}
+  rpc GetUsersDeviceId (GetUsersDeviceArgs) returns (GetUsersDeviceIdResponse) {}
+  rpc GetUserDevice (GetUserDeviceArgs) returns (AddDeviceIdBody) {}
+}
+
+message BasicChanelRequest {
+  int32 kind = 1;
+  string societyId = 2;
+  string message = 3;
+}
+
+message BasicChanelResponse {
+  int32 kind = 1;
+  string societyId = 2;
+  string message = 3;
+}
+
+message GetUserDeviceArgs {
+  int32 userId = 1;
+}
+
+message GetUsersDeviceArgs {
+  repeated int32 userId = 1;
+}
+
+message GetUsersDeviceIdResponse {
+  repeated string deviceId = 1;
+}
+
+message GetUserDeviceIdResponse {
+  string deviceId = 1;
+}
+
+message ValidateUserArgs {
+  string email = 1;
+  string password = 2;
+  string societyId = 3;
+}
+
+message AddDeviceIdBody {
+  string deviceId = 1;
+  bool isAndroid = 2;
+  bool isIos = 3;
+  string appVersion = 4;
+  string osVersion = 5;
+  string deviceBrand = 6;
+  string deviceModel = 7;
+  string deviceLanguage = 8;
+  int32 user = 9;
+  string societyId = 10;
+}
+
+message SocietyType {
+  string name = 1;
+  string api = 2;
+  bool isDefault = 3;
+  string id = 4;
+};
+
+message User {
+  optional string email = 2;
+  optional string society = 3;
+}
+
+message Empty {}
+
+message ValidateUserResponse {
+  oneof response {
+    ValidatedUser user = 1;
+    Empty empty = 2;
+  }
+}
+
+message ValidatedUser {
+  string access_token = 1;
+  int32 statusCode = 2;
+  int32 id = 3;
+  string email = 4;
+  string defaultSociety = 5;
+  repeated Society societies = 6;
+}
+
+message Society {
+  string id = 1;
+  string api = 3;
+  string name = 4;
+}

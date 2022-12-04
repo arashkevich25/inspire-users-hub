@@ -1,0 +1,35 @@
+{
+    "generalConfiguration": {
+        "exclude": [".*polyfill\\.ts"],
+        "sortOnBeforeSave": true
+    },
+    "importStringConfiguration": {
+        "maximumNumberOfImportExpressionsPerLine": {
+            "type": "newLineEachExpressionAfterCountLimit",
+            "count": 80
+        },
+        "tabSize": 2,
+        "quoteMark": "single",
+        "trailingComma": "multiLine"
+    },
+    "sortConfiguration": {
+        "customOrderingRules": {
+            "rules": [
+                {
+                    "regex": "^[@]",
+                    "orderLevel": 10
+                },
+                {
+                    "type": "importMember",
+                    "regex": "^$",
+                    "orderLevel": 60,
+                    "disableSort": true
+                },
+                {
+                    "regex": "^(types)|(tools)|(entities)|(services)|(guars)|(core)|(auth)",
+                    "orderLevel": 40
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,9 @@
+FROM node:14 AS development
+ARG CODEARTIFACT_AUTH_TOKEN
+ENV CODEARTIFACT_AUTH_TOKEN=${CODEARTIFACT_AUTH_TOKEN}
+WORKDIR /app
+COPY .npmrc /app/
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
